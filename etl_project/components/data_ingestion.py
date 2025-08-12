@@ -34,7 +34,7 @@ class DataIngestion:
             df = pd.DataFrame(list(collection.find()))
 
             if "_id" in df.columns.to_list():
-                df.drop(columns=["_id"], axis=1)
+                df.drop(columns=["_id"], axis=1, inplace=True)
             return df
         except Exception as e:
             raise ETLPipelineException(e, sys)
