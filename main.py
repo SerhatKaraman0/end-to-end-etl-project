@@ -1,3 +1,4 @@
+from etl_project.components.model_trainer import ModelTrainer
 from etl_project.components.data_validation import DataValidation
 from etl_project.components.data_ingestion import DataIngestion
 from etl_project.components.data_transformation import DataTransformation
@@ -6,7 +7,8 @@ from etl_project.logging.logger import logging
 from etl_project.entity.config_entity import (DataIngestionConfig, 
                                               TrainingPipelineConfig, 
                                               DataValidationConfig, 
-                                              DataTransformationConfig)
+                                              DataTransformationConfig,
+                                              ModelTrainerConfig)
 import sys
 
 if __name__ == "__main__":
@@ -37,6 +39,13 @@ if __name__ == "__main__":
         data_transformation_artifact = data_transformation.initiate_data_transformation()
         logging.info("Data Transformation Completed")
         print(data_transformation_artifact)
+
+        logging.info("Initiate Model Trainer")
+        model_trainer_config = ModelTrainerConfig(training_pipeline_config)
+        model_trainer = ModelTrainer(model_trainer_config, data_transformation_artifact)
+        model_trainer_artifact = model_trainer.initiate_model_trainer()
+        logging.info("Model Training Completed")
+        print(model_trainer_artifact)
 
     
     except Exception as e:

@@ -6,4 +6,6 @@ certifi
 dill
 scikit-learn
 pyyaml
+mlflow
+dagshub
 ## -e .
