@@ -530,9 +530,6 @@ MONGO_DB_URI=your_mongodb_connection_string
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Authors
 
@@ -547,10 +544,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-For support, email serhat@example.com or create an issue in the repository.
+For support, email serhatkaramanworkmail@gmail.com or create an issue in the repository.
 
 ---
 
 Star this repository if you found it helpful!
-
-# Trigger deployment
