@@ -3,7 +3,9 @@ WORKDIR /app
 
 # Copy requirements first for better caching
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir python-multipart
 
 # Install system dependencies
 RUN apt-get update -y && \
@@ -13,6 +15,9 @@ RUN apt-get update -y && \
 
 # Copy application code
 COPY . /app
+
+# Ensure final_model directory exists and has proper permissions
+RUN mkdir -p /app/final_model /app/prediction_output /app/logs
 
 EXPOSE 8000
 
