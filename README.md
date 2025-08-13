@@ -1,4 +1,4 @@
-# 🚀 Network Security - Phishing Detection Pipeline
+# ETL Pipeline Template Project
 
 [![Workflow](https://github.com/SerhatKaraman0/end-to-end-etl-project/actions/workflows/main.yml/badge.svg)](https://github.com/SerhatKaraman0/end-to-end-etl-project/actions/workflows/main.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-311/)
@@ -6,31 +6,33 @@
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
 
-A complete end-to-end machine learning pipeline for network security and phishing detection with a beautiful modern web interface. This project demonstrates MLOps best practices including CI/CD, containerization, cloud deployment, and professional frontend design.
+A complete end-to-end ETL (Extract, Transform, Load) pipeline template with machine learning capabilities and a beautiful modern web interface. This template demonstrates MLOps best practices including CI/CD, containerization, cloud deployment, and professional frontend design. Use this as a starting point for your own ETL pipeline projects.
 
-## 🌟 Features
+## Features
 
-### 🎯 **Core Functionality**
-- **ML Model Training**: Complete pipeline for phishing detection using ensemble methods
+### Core Functionality
+- **ETL Pipeline**: Complete Extract, Transform, Load pipeline with ML capabilities
+- **Data Ingestion**: Flexible data sources (CSV, databases, APIs)
+- **Data Transformation**: Preprocessing, feature engineering, and data validation
+- **ML Model Training**: Configurable machine learning pipeline with ensemble methods
 - **Real-time Predictions**: Upload CSV files and get instant ML predictions
-- **Data Validation**: Comprehensive data quality checks and schema validation
 - **Model Versioning**: MLflow integration for experiment tracking and model management
 
-### 🎨 **Professional Frontend**
+### Professional Frontend
 - **Modern Glassmorphism Design**: Beautiful translucent UI with backdrop blur effects
 - **Responsive Interface**: Works perfectly on desktop, tablet, and mobile devices
 - **Interactive Visualizations**: Dynamic charts and statistics for prediction results
 - **Drag & Drop Upload**: Intuitive file upload with visual feedback
 - **Real-time Progress**: Loading states and progress bars for better UX
 
-### ⚡ **DevOps & Infrastructure**
+### DevOps & Infrastructure
 - **CI/CD Pipeline**: Automated testing, building, and deployment with GitHub Actions
 - **Docker Containerization**: Multi-stage builds with optimized image sizes
 - **AWS Integration**: ECR for container registry, EC2 for deployment
 - **Health Checks**: Container health monitoring and automatic restarts
 - **Security**: Proper secrets management and access controls
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 graph TB
@@ -50,7 +52,31 @@ graph TB
     N --> O[EC2 Deployment]
 ```
 
-## 🛠️ Tech Stack
+## Template Customization
+
+This template can be easily customized for your specific use case:
+
+### Data Sources
+- Replace `data/phisingData.csv` with your dataset
+- Update data schema in `data_schema/schema.yaml`
+- Modify data ingestion logic in `etl_project/components/data_ingestion.py`
+
+### ML Models
+- Customize algorithms in `etl_project/components/model_trainer.py`
+- Update feature engineering in `etl_project/components/data_transformation.py`
+- Configure model parameters in `params.yaml`
+
+### Business Logic
+- Modify prediction logic in `app.py`
+- Update validation rules in `etl_project/components/data_validation.py`
+- Customize pipeline constants in `etl_project/constants/training_pipeline/`
+
+### Frontend
+- Update branding and styling in `templates/index.html`
+- Modify API endpoints and functionality
+- Customize visualizations and charts
+
+## Tech Stack
 
 ### **Backend**
 - **Python 3.11**: Core programming language
@@ -73,7 +99,7 @@ graph TB
 - **AWS EC2**: Cloud compute platform
 - **MongoDB**: Document database for data storage
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.11+
@@ -81,7 +107,39 @@ graph TB
 - AWS CLI configured
 - MongoDB instance
 
-### Local Development
+### Using Makefile Commands (Recommended)
+
+This project includes a comprehensive Makefile for easy development. Here are the most common workflows:
+
+#### Development Setup
+```bash
+# Complete development environment setup
+make dev
+
+# Or step by step:
+make setup          # Create virtual environment
+source venv/bin/activate
+make install        # Install dependencies
+make run           # Start the application
+```
+
+#### Testing and Quality
+```bash
+make test          # Run tests
+make lint          # Run code linting
+make format        # Format code
+make full-test     # Run complete test suite
+```
+
+#### Docker Development
+```bash
+make quick-docker  # Build and run in Docker
+make docker-logs   # View container logs
+make restart       # Restart container
+make docker-clean  # Clean up Docker resources
+```
+
+### Manual Setup (Alternative)
 
 1. **Clone the repository**
    ```bash
@@ -100,48 +158,46 @@ graph TB
    pip install -r requirements.txt
    ```
 
-4. **Set environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-5. **Run the application**
+4. **Run the application**
    ```bash
    python app.py
    ```
 
-6. **Access the application**
+5. **Access the application**
    - Web Interface: http://localhost:8000
    - API Documentation: http://localhost:8000/docs
 
 ### Docker Deployment
 
-1. **Build the image**
-   ```bash
-   docker build -t networkssecurity .
-   ```
+Using Makefile (Recommended):
+```bash
+make docker-build     # Build Docker image
+make docker-run       # Run container
+make status           # Check if running
+```
 
-2. **Run the container**
-   ```bash
-   docker run -d -p 8080:8000 --name networkssecurity \
-     -e AWS_ACCESS_KEY_ID=your_key \
-     -e AWS_SECRET_ACCESS_KEY=your_secret \
-     -e AWS_REGION=us-east-1 \
-     etl-pipeline
-   ```
+Manual Docker commands:
+```bash
+docker build -t etlpipeline .
+docker run -d -p 8080:8000 --name etlpipeline \
+  -e AWS_ACCESS_KEY_ID=your_key \
+  -e AWS_SECRET_ACCESS_KEY=your_secret \
+  -e AWS_REGION=us-east-1 \
+  etlpipeline
+```
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 etl_pipeline_project/
 ├── app.py                          # FastAPI application entry point
 ├── Dockerfile                      # Container configuration
+├── Makefile                        # Development commands and workflows
 ├── requirements.txt                # Python dependencies
-├── .github/workflows/main.yml      # CI/CD pipeline
+├── .github/workflows/main.yml      # CI/CD pipeline configuration
 ├── templates/
-│   └── index.html                  # Modern web interface
-├── etl_project/
+│   └── index.html                  # Modern web interface (no templates)
+├── etl_project/                    # Core ETL pipeline package
 │   ├── components/                 # ML pipeline components
 │   │   ├── data_ingestion.py      # Data collection and loading
 │   │   ├── data_validation.py     # Data quality checks
@@ -167,14 +223,121 @@ etl_pipeline_project/
 │   └── cloud/
 │       └── s3_sync.py             # AWS S3 synchronization
 ├── data/
-│   └── phishingData.csv           # Sample dataset
-├── final_model/
+│   └── phishingData.csv           # Sample dataset (replace with your data)
+├── data_schema/
+│   └── schema.yaml                # Data validation schema
+├── config/
+│   └── config.yaml                # Application configuration
+├── final_model/                    # Production models
 │   ├── model.pkl                  # Trained ML model
 │   └── preprocessor.pkl           # Data preprocessor
-└── artifacts/                     # Training artifacts and logs
+├── artifacts/                     # Training artifacts and logs
+├── logs/                          # Application logs
+└── prediction_output/             # Prediction results
 ```
 
-## 🎯 Usage
+### Key Components Explained
+
+#### Core Application Files
+- **app.py**: FastAPI web application serving the frontend and API endpoints
+- **Makefile**: Comprehensive development commands for all common tasks
+- **Dockerfile**: Container configuration with optimized multi-stage build
+- **requirements.txt**: Python dependencies with version specifications
+
+#### ETL Pipeline Components
+- **data_ingestion.py**: Handles data loading from various sources (CSV, databases, APIs)
+- **data_validation.py**: Implements data quality checks and schema validation
+- **data_transformation.py**: Feature engineering, preprocessing, and data cleaning
+- **model_trainer.py**: ML model training with hyperparameter tuning and evaluation
+
+#### Configuration and Entity Classes
+- **config_entity.py**: Defines configuration classes for each pipeline component
+- **artifact_entity.py**: Defines data artifacts passed between pipeline stages
+- **constants/**: Contains all pipeline constants and configuration values
+
+#### Utilities and Infrastructure
+- **exception.py**: Custom exception handling for the ETL pipeline
+- **logger.py**: Centralized logging configuration
+- **s3_sync.py**: AWS S3 integration for model and artifact storage
+- **common.py**: Utility functions used across the project
+
+#### Frontend and Templates
+- **templates/index.html**: Modern web interface built with HTML/CSS/JavaScript
+  - No template engine dependencies (no Jinja2)
+  - Professional glassmorphism design
+  - Interactive data visualization
+  - Responsive mobile-friendly layout
+
+## Usage
+
+## Makefile Commands Reference
+
+The project includes a comprehensive Makefile with commands organized by category:
+
+### Development Commands
+```bash
+make help           # Show all available commands
+make setup          # Create virtual environment
+make install        # Install dependencies
+make run            # Start the application locally
+make clean          # Clean temporary files and caches
+```
+
+### Testing and Quality
+```bash
+make test           # Run tests
+make lint           # Run code linting
+make format         # Format code with black
+make full-test      # Run complete test suite (clean + lint + test)
+```
+
+### ETL Pipeline Operations
+```bash
+make train          # Train the ML model
+make predict        # Run prediction pipeline (requires CSV file)
+make create-sample  # Create sample test data
+```
+
+### Docker Commands
+```bash
+make docker-build   # Build Docker image
+make docker-run     # Run Docker container
+make docker-stop    # Stop and remove container
+make docker-logs    # Show container logs
+make docker-shell   # Open shell in container
+make docker-clean   # Clean Docker resources
+```
+
+### Quick Workflows
+```bash
+make dev            # Complete development setup
+make quick-start    # Install and run locally
+make quick-docker   # Build and run in Docker
+make restart        # Restart Docker container
+```
+
+### CI/CD and Deployment
+```bash
+make deploy         # Deploy to production (triggers CI/CD)
+make status         # Check application status
+make logs           # Show application logs
+```
+
+### Utilities
+```bash
+make check-deps     # Check for outdated dependencies
+make update-deps    # Update dependencies
+make env-info       # Show environment information
+```
+
+### Help Commands
+```bash
+make help-dev       # Development workflow help
+make help-docker    # Docker workflow help
+make help-deploy    # Deployment workflow help
+```
+
+## Usage
 
 ### Web Interface
 
@@ -191,6 +354,22 @@ etl_pipeline_project/
 - `GET /train`: Trigger model training
 - `GET /docs`: Interactive API documentation
 
+### Command Line Usage
+
+```bash
+# Create sample data for testing
+make create-sample
+
+# Train the model
+make train
+
+# Make predictions
+make predict
+
+# Check application status
+make status
+```
+
 ### Sample API Usage
 
 ```python
@@ -205,7 +384,63 @@ predictions = response.json()
 response = requests.get('http://your-domain:8080/train')
 ```
 
-## 🔄 CI/CD Pipeline
+## Important Project Components
+
+### 1. ETL Pipeline Architecture
+
+The project follows a modular ETL architecture:
+
+**Extract (Data Ingestion)**
+- Supports multiple data sources (CSV, MongoDB, APIs)
+- Configurable data loading strategies
+- Built-in error handling and logging
+
+**Transform (Data Processing)**
+- Feature engineering and preprocessing
+- Data validation against schema
+- Outlier detection and handling
+- Missing value imputation
+
+**Load (Model Training & Deployment)**
+- Model training with cross-validation
+- Hyperparameter optimization
+- Model evaluation and metrics
+- Model versioning with MLflow
+
+### 2. Configuration Management
+
+The project uses a layered configuration approach:
+- **config.yaml**: Application-level configuration
+- **schema.yaml**: Data validation schema
+- **params.yaml**: Model parameters and hyperparameters
+- **config_entity.py**: Type-safe configuration classes
+
+### 3. Error Handling and Logging
+
+Comprehensive error handling system:
+- Custom exception classes with detailed error messages
+- Centralized logging with configurable levels
+- Structured logging for debugging and monitoring
+- Error tracking across all pipeline stages
+
+### 4. Model Management
+
+Professional ML model management:
+- Model versioning and tracking
+- A/B testing capabilities
+- Model performance monitoring
+- Automated model deployment pipeline
+
+### 5. CI/CD Integration
+
+Complete DevOps pipeline:
+- Automated testing on code changes
+- Docker containerization
+- AWS ECR for container registry
+- Automated deployment to EC2
+- Health checks and monitoring
+
+## CI/CD Pipeline
 
 The project includes a complete CI/CD pipeline with:
 
@@ -224,7 +459,7 @@ The project includes a complete CI/CD pipeline with:
    - Container health checks
    - Automatic rollback on failure
 
-## 📈 Model Performance
+## Model Performance
 
 - **Algorithm**: Ensemble methods (Random Forest, Gradient Boosting)
 - **Features**: 30 phishing detection features
@@ -232,7 +467,7 @@ The project includes a complete CI/CD pipeline with:
 - **F1-Score**: >0.94 for both classes
 - **Inference Time**: <100ms per prediction
 
-## 🛡️ Security Features
+## Security Features
 
 - **Input Validation**: Comprehensive data validation and sanitization
 - **Error Handling**: Graceful error handling with detailed logging
@@ -240,7 +475,7 @@ The project includes a complete CI/CD pipeline with:
 - **CORS Configuration**: Proper cross-origin resource sharing setup
 - **Health Checks**: Container and application health monitoring
 
-## 🌐 Deployment
+## Deployment
 
 ### GitHub Secrets Setup
 
@@ -287,7 +522,7 @@ AWS_REGION=us-east-1
 MONGO_DB_URI=your_mongodb_connection_string
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -295,27 +530,27 @@ MONGO_DB_URI=your_mongodb_connection_string
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
+## Authors
 
 - **Serhat Karaman** - *Initial work* - [SerhatKaraman0](https://github.com/SerhatKaraman0)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Dataset: Phishing Website Detection Dataset
 - Icons: FontAwesome
 - Fonts: Inter by Rasmus Andersson
 - Inspiration: Modern MLOps practices and clean architecture principles
 
-## 📞 Support
+## Support
 
 For support, email serhat@example.com or create an issue in the repository.
 
 ---
 
-⭐ **Star this repository if you found it helpful!** ⭐
+Star this repository if you found it helpful!
 
 # Trigger deployment
