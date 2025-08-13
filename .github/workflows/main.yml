@@ -105,7 +105,8 @@ jobs:
        
       - name: Stop and remove existing container if running
         run: |
-          docker ps -q --filter "name=etlpipeline" | grep -q . && docker stop etlpipeline && docker rm -fv etlpipeline || echo "No existing container"
+          docker stop etlpipeline || echo "Container not running"
+          docker rm etlpipeline || echo "Container not found"
           
       - name: Run Docker Image to serve users
         env:
