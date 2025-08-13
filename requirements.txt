@@ -7,5 +7,7 @@ dill
 scikit-learn
 pyyaml
 mlflow
+fastapi
+uvicorn
 dagshub
 ## -e .
